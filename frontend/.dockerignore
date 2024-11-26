@@ -1,9 +1,9 @@
 
-node_modules
-build
+node_modules/
+build/
 .dockerignore
 Dockerfile
-.git
+.git/
 .gitignore
 README.md
 npm-debug.log
