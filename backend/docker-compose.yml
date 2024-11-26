@@ -1,1 +1,25 @@
 
+version: '3'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "80:80"  # Expose the React app on port 80
+    depends_on:
+      - backend  # Ensure back-end is running first
+    networks:
+      - mynetwork
+
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "5000:5000"  # Expose Flask (or other back-end) on port 5000
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    driver: bridge
