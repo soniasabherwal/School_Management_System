@@ -1,1 +1,52 @@
 
+import React, { useState, useEffect } from 'react';
+
+function GradeEntry() {
+  const [students, setStudents] = useState([]);
+  const [selectedStudent, setSelectedStudent] = useState('');
+  const [grade, setGrade] = useState('');
+
+  useEffect(() => {
+    fetch('/api/students')
+      .then(response => response.json())
+      .then(data => setStudents(data));
+  }, []);
+
+  const submitGrade = () => {
+    if (selectedStudent && grade) {
+      fetch(`/api/students/${selectedStudent}/grades`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ grade }),
+      }).then(() => alert('Grade submitted!'));
+      setGrade('');
+      setSelectedStudent('');
+    }
+  };
+
+  return (
+    <div>
+      <h1>Grade Entry</h1>
+      <select
+        value={selectedStudent}
+        onChange={e => setSelectedStudent(e.target.value)}
+      >
+        <option value="">Select a Student</option>
+        {students.map(student => (
+          <option key={student.id} value={student.id}>
+            {student.name}
+          </option>
+        ))}
+      </select>
+      <input
+        type="text"
+        value={grade}
+        onChange={e => setGrade(e.target.value)}
+        placeholder="Enter grade"
+      />
+      <button onClick={submitGrade}>Submit Grade</button>
+    </div>
+  );
+}
+
+export default GradeEntry;
