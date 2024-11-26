@@ -1,5 +1,7 @@
 
 from flask import Flask, jsonify
+from flask import Flask, render_template
+
 
 app = Flask(__name__)
 
@@ -102,6 +104,11 @@ classrooms = [
 def home():
     return "Welcome to the School Management System!"
 
+@app.route('/')
+def home():
+    return render_template("index.html")  # Load the main HTML page
+
+
 @app.route('/students', methods=['GET'])
 def get_students():
     return jsonify(students)
@@ -121,6 +128,11 @@ def get_exam_results():
 @app.route('/classrooms', methods=['GET'])
 def get_classrooms():
     return jsonify(classrooms)
+
+@app.route('/manifest.json')
+def manifest():
+    return app.send_static_file('manifest.json')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
