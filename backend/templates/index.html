@@ -1,1 +1,56 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Management System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>School Management System</h1>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#students">Students</a></li>
+                    <li><a href="#faculty">Faculty</a></li>
+                    <li><a href="#classrooms">Classrooms</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="section">
+            <h2>Welcome to the School Management System</h2>
+            <p>Manage your school's students, faculty, classrooms, and more efficiently.</p>
+        </section>
+
+        <section id="students" class="section">
+            <h2>Students</h2>
+            <button onclick="fetchData('students')">View Students</button>
+            <div id="students-data"></div>
+        </section>
+
+        <section id="faculty" class="section">
+            <h2>Faculty</h2>
+            <button onclick="fetchData('faculty')">View Faculty</button>
+            <div id="faculty-data"></div>
+        </section>
+
+        <section id="classrooms" class="section">
+            <h2>Classrooms</h2>
+            <button onclick="fetchData('classrooms')">View Classrooms</button>
+            <div id="classrooms-data"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 School Management System. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
