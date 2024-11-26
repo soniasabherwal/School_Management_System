@@ -1,1 +1,7 @@
+{
+    "recommendations": [
+        "ms-python.python",
+        "docker.docker-extension"
+    ]
+}
 
