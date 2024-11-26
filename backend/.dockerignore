@@ -1,1 +1,10 @@
 
+__pycache__/
+*.pyc
+.env
+.dockerignore
+Dockerfile
+.git/
+.gitignore
+README.md
+npm-debug.log
