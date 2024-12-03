@@ -102,10 +102,6 @@ classrooms = [
 # Routes
 @app.route('/')
 def home():
-    return "Welcome to the School Management System!"
-
-@app.route('/')
-def home():
     return render_template("index.html")  # Load the main HTML page
 
 
