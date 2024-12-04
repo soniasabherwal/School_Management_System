@@ -1,5 +1,4 @@
-
-version: '3.9'
+version: '3.8'
 
 services:
   web:
@@ -11,18 +10,16 @@ services:
     volumes:
       - .:/app
     environment:
-      - FLASK_ENV=development
-      - FLASK_APP=app.py
-    depends_on:
-      - db
+      FLASK_ENV: development
+      DATABASE_URL: postgresql://user:password@db:5432/database_name
 
   db:
     image: postgres:13
-    container_name: postgres_db
-    environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: school_management
     ports:
       - "5432:5432"
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: database_name
+
 
