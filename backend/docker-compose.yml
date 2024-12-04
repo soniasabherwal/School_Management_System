@@ -1,25 +1,28 @@
 
-version: '3'
+version: '3.9'
 
 services:
-  frontend:
+  web:
     build:
-      context: ./frontend
+      context: .
+      dockerfile: Dockerfile
     ports:
-      - "80:80"  # Expose the React app on port 80
+      - "5000:5000"
+    volumes:
+      - .:/app
+    environment:
+      - FLASK_ENV=development
+      - FLASK_APP=app.py
     depends_on:
-      - backend  # Ensure back-end is running first
-    networks:
-      - mynetwork
+      - db
 
-  backend:
-    build:
-      context: ./backend
+  db:
+    image: postgres:13
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: school_management
     ports:
-      - "5000:5000"  # Expose Flask (or other back-end) on port 5000
-    networks:
-      - mynetwork
+      - "5432:5432"
 
-networks:
-  mynetwork:
-    driver: bridge
