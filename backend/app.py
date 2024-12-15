@@ -1,6 +1,26 @@
+from flask import Flask # type: ignore
 
-from flask import Flask, jsonify
-from flask import Flask, render_template
+# Import blueprints from controllers
+from controllers.student_controller import student_bp
+from controllers.faculty_controller import faculty_bp
+from controllers.classroom_controller import classroom_bp
+
+# Initialize Flask App
+app = Flask(
+    __name__,
+    static_folder='static',  # Specify the folder for static files
+    template_folder='templates'  # Specify the folder for HTML templates
+)
+
+# Register Blueprints
+app.register_blueprint(student_bp, url_prefix='/students')
+app.register_blueprint(faculty_bp, url_prefix='/faculty')
+app.register_blueprint(classroom_bp, url_prefix='/classrooms')
+
+
+
+from flask import Flask, jsonify # type: ignore
+from flask import Flask, render_template # type: ignore
 
 
 app = Flask(__name__)
@@ -102,10 +122,6 @@ classrooms = [
 # Routes
 @app.route('/')
 def home():
-    return "Welcome to the School Management System!"
-
-@app.route('/')
-def home():
     return render_template("index.html")  # Load the main HTML page
 
 
@@ -131,7 +147,7 @@ def get_classrooms():
 
 @app.route('/manifest.json')
 def manifest():
-    return app.send_static_file('manifest.json')
+    return app.send_backend_file('manifest.json')
 
 
 if __name__ == '__main__':

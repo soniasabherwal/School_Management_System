@@ -1,5 +1,5 @@
 
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request # type: ignore
 
 # Define a blueprint for student-related routes
 student_bp = Blueprint('student_bp', __name__)

@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
@@ -17,7 +16,7 @@ const StudentDetail = () => {
                     throw new Error("Failed to fetch student details");
                 }
                 const data = await response.json();
-                setStudent(data);
+                setStudent(data); // Assume the response returns an object representing a student
             } catch (err) {
                 setError(err.message);
             } finally {
@@ -36,10 +35,19 @@ const StudentDetail = () => {
             <h2>Student Details</h2>
             {student ? (
                 <div>
-                    <p><strong>ID:</strong> {student.student_id}</p>
-                    <p><strong>Name:</strong> {student.first_name}</p>
-                    <p><strong>Email:</strong> {student.email}</p>
-                    <p><strong>Phone:</strong> {student.phone}</p>
-                    <p><strong>Start Date:</strong> {student.start_date}</p>
-                    <p><strong>Degree:</strong> {student.degree}</p>
-                    <p><strong>Date of Birth:</strong> {student.dob}</p
+                    <p><strong>ID:</strong> {student.student_id || 'N/A'}</p>
+                    <p><strong>Name:</strong> {student.first_name || 'N/A'} {student.last_name || ''}</p>
+                    <p><strong>Email:</strong> {student.email || 'N/A'}</p>
+                    <p><strong>Phone:</strong> {student.phone || 'N/A'}</p>
+                    <p><strong>Start Date:</strong> {student.start_date || 'N/A'}</p>
+                    <p><strong>Degree:</strong> {student.degree || 'N/A'}</p>
+                    <p><strong>Date of Birth:</strong> {student.dob || 'N/A'}</p>
+                </div>
+            ) : (
+                <p>No student details found.</p>
+            )}
+        </div>
+    );
+};
+
+export default StudentDetail;

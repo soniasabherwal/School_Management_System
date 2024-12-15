@@ -1,25 +1,23 @@
-
-version: '3'
+version: '3.8'
 
 services:
-  frontend:
+  web:
     build:
-      context: ./frontend
+      context: .
+      dockerfile: Dockerfile
     ports:
-      - "80:80"  # Expose the React app on port 80
-    depends_on:
-      - backend  # Ensure back-end is running first
-    networks:
-      - mynetwork
+      - "5000:5000"
+    volumes:
+      - .:/app
+    environment:
+      FLASK_ENV: development
+      DATABASE_URL: postgresql://user:password@db:5432/database_name
 
-  backend:
-    build:
-      context: ./backend
+  db:
+    image: postgres:13
     ports:
-      - "5000:5000"  # Expose Flask (or other back-end) on port 5000
-    networks:
-      - mynetwork
-
-networks:
-  mynetwork:
-    driver: bridge
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: database_name
